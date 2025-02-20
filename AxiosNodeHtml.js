@@ -8,11 +8,12 @@ const base_url = "http://localhost:5000";
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/views'));
 
 app.get("/", async (req, res) => {
     try {
         const response = await axios.get(base_url + '/books');
+        console.log(response.data)
         res.render("books", { books: response.data });
     } catch (err) {
         console.log(err);
